@@ -9,8 +9,10 @@ const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 const siteUrl = "https://tool.cv-by-design.com"
-/** Absolute URL — some crawlers ignore metadataBase-resolved paths and fall back to favicon. */
-const ogImageUrl = `${siteUrl}/og-cv-tool-v2.png`
+/** Bump when changing OG artwork so Meta/WhatsApp refetch (they cache image URL + preview aggressively). */
+const OG_IMAGE_CACHE_VERSION = "3"
+/** Absolute URL — query is ignored for static files but changes og:image string so crawlers treat it as new. */
+const ogImageUrl = `${siteUrl}/og-cv-tool-v2.png?v=${OG_IMAGE_CACHE_VERSION}`
 
 /** HTML `<title>` + default SEO description (browser tab / search snippets). */
 const pageTitle = "Your Personalised CV Tool — Create a CV in minutes"
