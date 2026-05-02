@@ -12,10 +12,10 @@ const siteOrigin = "https://tool.cv-by-design.com"
 /** Canonical URL for sharing (trailing slash matches og:url). */
 const canonicalSiteUrl = `${siteOrigin}/`
 /**
- * Single share image for Facebook/WhatsApp — must be absolute HTTPS (not resolved from icons).
- * File: /public/og-cv-tool-v3.png
+ * Share image for Facebook/WhatsApp — JPEG (~90KB) so Meta’s crawler reliably fetches it.
+ * Large PNGs often fail silently → platforms fall back to the favicon. PNG stays in /public for other uses.
  */
-const OG_SHARE_IMAGE = "https://tool.cv-by-design.com/og-cv-tool-v3.png"
+const OG_SHARE_IMAGE = "https://tool.cv-by-design.com/og-cv-tool-v3.jpg?v=1"
 
 /** HTML `<title>` + primary SEO description. */
 const pageTitle = "Your Personalised CV Tool — Create a CV in minutes"
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
         secureUrl: OG_SHARE_IMAGE,
         width: 1200,
         height: 630,
-        type: "image/png",
+        type: "image/jpeg",
         alt: "Your Personalised CV Tool — CV layouts preview",
       },
     ],
