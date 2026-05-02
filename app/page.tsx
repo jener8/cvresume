@@ -1,36 +1,71 @@
 import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card"
 
 /**
- * Public entry (no client password gate). Crawlers and Facebook’s debugger get stable HTML + root layout metadata.
- * The protected tool lives at /app.
+ * Public landing — no auth. Crawlers get HTTP 200 + Open Graph from root layout.
+ * Password-protected tool: `/app` (see app/app/page.tsx).
  */
 export default function HomePage() {
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 px-6 py-16 text-center">
-      <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">CV by Design</p>
-      <h1 className="mt-3 text-2xl font-semibold tracking-tight text-gray-900 sm:text-3xl max-w-xl">
-        Personalised AI CV Tool
-      </h1>
-      <p className="mt-4 text-sm text-gray-600 max-w-md leading-relaxed">
-        Create faster, more effective CVs — tailored for every role
-      </p>
-      <Link
-        href="/app"
-        className="mt-10 inline-flex h-11 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-      >
-        Open CV tool
-      </Link>
-      <p className="mt-10 text-xs text-gray-500">
-        More information:{" "}
-        <a
-          href="https://cv-by-design.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="font-medium text-primary underline underline-offset-2"
-        >
-          cv-by-design.com
-        </a>
-      </p>
+    <main className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 px-4 py-12 md:py-16">
+      <Card className="w-full max-w-2xl border border-border/80 bg-card shadow-xl">
+        <CardHeader className="space-y-2 pb-2 text-center sm:space-y-3">
+          <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+            CV by Design
+          </p>
+          <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+            Your Personalised CV Tool
+          </h1>
+          <CardDescription className="text-base text-foreground/85 sm:text-lg">
+            Create faster, more effective CVs — tailored for every role
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-8 pt-2">
+          <p className="text-center text-sm leading-relaxed text-muted-foreground">
+            AI-powered CV builder with personalised guidance and coaching.
+          </p>
+
+          <div className="relative mx-auto w-full max-w-xl overflow-hidden rounded-xl border border-border bg-muted/30 shadow-sm">
+            {/* Plain /public URL — same file as og:image; avoids Image optimizer edge cases on deploy */}
+            <img
+              src="/og-cv-tool-v2.png"
+              alt=""
+              width={1200}
+              height={630}
+              decoding="async"
+              fetchPriority="high"
+              className="h-auto w-full object-cover"
+            />
+          </div>
+
+          <div className="flex flex-col items-center gap-2">
+            <Button asChild size="lg" className="min-h-11 min-w-[min(100%,280px)] px-8 text-base">
+              <Link href="/app">Start building your CV</Link>
+            </Button>
+            <p className="text-xs text-muted-foreground">Password required</p>
+          </div>
+        </CardContent>
+        <CardFooter className="flex flex-col items-center border-t border-border/60 pt-6 pb-6">
+          <p className="text-center text-sm text-muted-foreground">
+            Contact and more information:{" "}
+            <a
+              href="https://cv-by-design.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-primary underline underline-offset-2 hover:text-primary/90"
+            >
+              cv-by-design.com
+            </a>
+          </p>
+        </CardFooter>
+      </Card>
     </main>
   )
 }
