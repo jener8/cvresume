@@ -9,21 +9,26 @@ const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 const siteUrl = "https://tool.cv-by-design.com"
-/** Bump when replacing og-image.* so Meta/WhatsApp treat it as a new URL and refetch (preview cache is very sticky). */
-const OG_IMAGE_CACHE_VERSION = "20260202"
 /** Absolute URL — some crawlers ignore metadataBase-resolved paths and fall back to favicon. */
-const ogImageUrl = `${siteUrl}/og-image.jpg?v=${OG_IMAGE_CACHE_VERSION}`
+const ogImageUrl = `${siteUrl}/og-cv-tool-v2.png`
+
+/** HTML `<title>` + default SEO description (browser tab / search snippets). */
+const pageTitle = "Your Personalised CV Tool — Create a CV in minutes"
+const pageDescription =
+  "AI-powered CV builder with personalised guidance and coaching. Create faster, more effective CVs tailored for every role."
+
+/** Open Graph / Twitter card title & description (sharing previews). */
+const socialTitle = "Personalised AI CV Tool"
+const socialDescription = "Create faster, more effective CVs — tailored for every role"
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "CV by Design — Build a CV that gets interviews",
-  description:
-    "Create a professional, tailored CV with AI. Designed to help you stand out and get interviews.",
+  title: pageTitle,
+  description: pageDescription,
   generator: "v0.app",
   openGraph: {
-    title: "CV by Design — Build a CV that gets interviews",
-    description:
-      "Create a professional, tailored CV with AI. Designed to help you stand out and get interviews.",
+    title: socialTitle,
+    description: socialDescription,
     url: siteUrl,
     siteName: "CV by Design",
     type: "website",
@@ -34,15 +39,15 @@ export const metadata: Metadata = {
         secureUrl: ogImageUrl,
         width: 1200,
         height: 630,
-        type: "image/jpeg",
-        alt: "CV by Design — stacked CV pages in a fan layout",
+        type: "image/png",
+        alt: "Personalised AI CV Tool — minimal CV card layouts",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "CV by Design — Build a CV that gets interviews",
-    description: "Create a professional, tailored CV with AI.",
+    title: socialTitle,
+    description: socialDescription,
     images: [ogImageUrl],
   },
   icons: {
