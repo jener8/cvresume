@@ -11,8 +11,11 @@ const _geistMono = Geist_Mono({ subsets: ["latin"] })
 const siteOrigin = "https://tool.cv-by-design.com"
 /** Canonical URL for sharing (trailing slash matches og:url). */
 const canonicalSiteUrl = `${siteOrigin}/`
-/** Open Graph image — PNG in /public; publicly accessible without auth. */
-const ogImageAbsoluteUrl = `${siteOrigin}/og-cv-tool-v3.png`
+/**
+ * Single share image for Facebook/WhatsApp — must be absolute HTTPS (not resolved from icons).
+ * File: /public/og-cv-tool-v3.png
+ */
+const OG_SHARE_IMAGE = "https://tool.cv-by-design.com/og-cv-tool-v3.png"
 
 /** HTML `<title>` + primary SEO description. */
 const pageTitle = "Your Personalised CV Tool — Create a CV in minutes"
@@ -37,8 +40,8 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: ogImageAbsoluteUrl,
-        secureUrl: ogImageAbsoluteUrl,
+        url: OG_SHARE_IMAGE,
+        secureUrl: OG_SHARE_IMAGE,
         width: 1200,
         height: 630,
         type: "image/png",
@@ -50,7 +53,14 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: socialTitle,
     description: socialDescription,
-    images: [ogImageAbsoluteUrl],
+    images: [
+      {
+        url: OG_SHARE_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: "Your Personalised CV Tool — CV layouts preview",
+      },
+    ],
   },
   icons: {
     icon: [

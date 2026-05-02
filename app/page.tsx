@@ -35,7 +35,7 @@ export default function HomePage() {
           <div className="relative mx-auto w-full max-w-xl overflow-hidden rounded-xl border border-border bg-muted/30 shadow-sm">
             {/* Plain /public URL — same file as og:image; avoids Image optimizer edge cases on deploy */}
             <img
-              src="/og-cv-tool-v2.png"
+              src="/og-cv-tool-v3.png"
               alt=""
               width={1200}
               height={630}
