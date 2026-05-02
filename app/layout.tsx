@@ -8,41 +8,41 @@ import "./globals.css"
 const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
-const siteUrl = "https://tool.cv-by-design.com"
-/** Bump when changing OG artwork so Meta/WhatsApp refetch (they cache image URL + preview aggressively). */
-const OG_IMAGE_CACHE_VERSION = "5"
-/** JPEG (~90KB) — large PNGs often fail Meta/WhatsApp image fetch; they then fall back to the favicon. */
-const ogImageUrl = `${siteUrl}/og-cv-tool-v2.jpg?v=${OG_IMAGE_CACHE_VERSION}`
+const siteOrigin = "https://tool.cv-by-design.com"
+/** Canonical URL for sharing (trailing slash matches og:url). */
+const canonicalSiteUrl = `${siteOrigin}/`
+/** Open Graph image — PNG in /public; publicly accessible without auth. */
+const ogImageAbsoluteUrl = `${siteOrigin}/og-cv-tool-v3.png`
 
-/** HTML `<title>` + default SEO description (browser tab / search snippets). */
+/** HTML `<title>` + primary SEO description. */
 const pageTitle = "Your Personalised CV Tool — Create a CV in minutes"
 const pageDescription =
-  "AI-powered CV builder with personalised guidance and coaching. Create faster, more effective CVs tailored for every role."
+  "Create faster, more effective CVs with personalised AI guidance and coaching."
 
-/** Open Graph / Twitter card title & description (sharing previews). */
-const socialTitle = "Personalised AI CV Tool"
+/** Open Graph / Twitter card — preview title matches task (same as page title). */
+const socialTitle = "Your Personalised CV Tool — Create a CV in minutes"
 const socialDescription = "Create faster, more effective CVs — tailored for every role"
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(siteOrigin),
   title: pageTitle,
   description: pageDescription,
   generator: "v0.app",
   openGraph: {
     title: socialTitle,
     description: socialDescription,
-    url: siteUrl,
+    url: canonicalSiteUrl,
     siteName: "CV by Design",
     type: "website",
     locale: "en_US",
     images: [
       {
-        url: ogImageUrl,
-        secureUrl: ogImageUrl,
+        url: ogImageAbsoluteUrl,
+        secureUrl: ogImageAbsoluteUrl,
         width: 1200,
         height: 630,
-        type: "image/jpeg",
-        alt: "Personalised AI CV Tool — minimal CV card layouts",
+        type: "image/png",
+        alt: "Your Personalised CV Tool — CV layouts preview",
       },
     ],
   },
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: socialTitle,
     description: socialDescription,
-    images: [ogImageUrl],
+    images: [ogImageAbsoluteUrl],
   },
   icons: {
     icon: [
