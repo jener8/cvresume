@@ -10,9 +10,9 @@ const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 const siteUrl = "https://tool.cv-by-design.com"
 /** Bump when changing OG artwork so Meta/WhatsApp refetch (they cache image URL + preview aggressively). */
-const OG_IMAGE_CACHE_VERSION = "3"
-/** Absolute URL — query is ignored for static files but changes og:image string so crawlers treat it as new. */
-const ogImageUrl = `${siteUrl}/og-cv-tool-v2.png?v=${OG_IMAGE_CACHE_VERSION}`
+const OG_IMAGE_CACHE_VERSION = "5"
+/** JPEG (~90KB) — large PNGs often fail Meta/WhatsApp image fetch; they then fall back to the favicon. */
+const ogImageUrl = `${siteUrl}/og-cv-tool-v2.jpg?v=${OG_IMAGE_CACHE_VERSION}`
 
 /** HTML `<title>` + default SEO description (browser tab / search snippets). */
 const pageTitle = "Your Personalised CV Tool — Create a CV in minutes"
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
         secureUrl: ogImageUrl,
         width: 1200,
         height: 630,
-        type: "image/png",
+        type: "image/jpeg",
         alt: "Personalised AI CV Tool — minimal CV card layouts",
       },
     ],
