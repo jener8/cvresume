@@ -15,17 +15,30 @@ interface PasswordGateProps {
 export function PasswordGate({ onAuthenticated }: PasswordGateProps) {
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
+  const [submitting, setSubmitting] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-
-    if (password === "CVResume") {
-      // Store authentication in localStorage
+    setError("")
+    setSubmitting(true)
+    try {
+      const res = await fetch("/api/auth/site-gate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password }),
+      })
+      if (!res.ok) {
+        setError("Incorrect password")
+        setPassword("")
+        return
+      }
       localStorage.setItem("cv_authenticated", "true")
       onAuthenticated()
-    } else {
-      setError("Incorrect password")
+    } catch {
+      setError("Unable to verify password. Please try again.")
       setPassword("")
+    } finally {
+      setSubmitting(false)
     }
   }
 
@@ -56,12 +69,13 @@ export function PasswordGate({ onAuthenticated }: PasswordGateProps) {
                 placeholder="Enter password"
                 className="mt-1"
                 autoFocus
+                disabled={submitting}
               />
               {error && <p className="text-sm text-red-600 mt-2">{error}</p>}
             </div>
 
-            <Button type="submit" className="w-full">
-              Access Dashboard
+            <Button type="submit" className="w-full" disabled={submitting}>
+              {submitting ? "Checking…" : "Access Dashboard"}
             </Button>
           </form>
         </div>
